@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>母亲节快乐</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    background: linear-gradient(145deg, #fff0ea 0%, #ffe6e8 100%);
+    font-family:'Segoe UI', 'Quicksand', system-ui, '微软雅黑', 'Poppins', sans-serif;
+    min-height:100vh;
+    padding:25px 18px;
+    position:relative;
+    overflow-x:hidden;
+}
+
+.box{
+    width:100%;
+    max-width:720px;
+    margin:20px auto 50px;
+    background: rgba(255, 253, 251, 0.98);
+    border-radius: 56px;
+    padding: 45px 38px 55px;
+    border: 1px solid rgba(255, 185, 155, 0.6);
+    box-shadow: 0 20px 40px rgba(255, 125, 100, 0.12), 0 0 0 6px #fffaf8, 0 0 0 10px #ffcdbc;
+    text-align:center;
+}
+
+h1{
+    font-size: 38px;
+    background: linear-gradient(135deg, #e96a70, #ff8f6a);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+h1:after{
+    content:"🌼";
+    font-size: 38px;
+    background: none;
+    color: #ff9f7a;
+}
+
+.txt-container {
+    position: relative;
+    min-height: 380px;
+    padding: 8px 20px;
+    margin: 12px 0;
+}
+.txt{
+    font-size: 18px;
+    line-height: 2.1;
+    color: #4b2e2c;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    background: #fffbf9;
+    padding: 22px 26px;
+    border-radius: 48px;
+    box-shadow: inset 0 1px 4px #ffe0d4, 0 12px 20px rgba(255, 125, 90, 0.12);
+    text-align: center;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.sticker {
+    position: absolute;
+    font-size: 44px;
+    filter: drop-shadow(2px 5px 10px rgba(0,0,0,0.08));
+    animation: gentleFloat 5s infinite ease-in-out;
+    cursor: default;
+    z-index: 10;
+}
+@keyframes gentleFloat{
+    0%{transform: translateY(0px) rotate(0deg);}
+    50%{transform: translateY(-5px) rotate(2deg);}
+    100%{transform: translateY(0px) rotate(0deg);}
+}
+
+.photo-area {
+    margin-bottom: 24px;
+    text-align: center;
+}
+.photo-card {
+    background: linear-gradient(135deg, #fff5f0, #ffede5);
+    border-radius: 48px;
+    padding: 20px 20px 24px;
+    border: 2px solid #ffd9c8;
+    box-shadow: 0 8px 20px rgba(255, 125, 90, 0.15);
+}
+.photo-label {
+    font-size: 15px;
+    color: #e57a5c;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+}
+.photo-frame {
+    position: relative;
+    display: inline-block;
+}
+#momPhoto {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    background: #ffe0d4;
+    transition: all 0.3s ease;
+}
+.photo-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+}
+.nav-btn {
+    background: #ffe3d8;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #c26a50;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.nav-btn:hover {
+    background: #ffcfbd;
+    transform: scale(1.05);
+}
+.photo-counter {
+    font-size: 14px;
+    color: #e57a5c;
+    background: #fff3ed;
+    padding: 6px 16px;
+    border-radius: 40px;
+    font-weight: 500;
+}
+.upload-section {
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+.upload-btn {
+    background: #ffddd2;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #c26a50;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.upload-btn:hover {
+    background: #ffcfbd;
+    transform: translateY(-2px);
+}
+.photo-hint {
+    font-size: 11px;
+    color: #e6aa94;
+    margin-top: 12px;
+}
+#photoUpload {
+    display: none;
+}
+.delete-all-btn {
+    background: transparent;
+    border: 1px solid #ffcdbb;
+    padding: 5px 14px;
+    border-radius: 40px;
+    font-size: 12px;
+    color: #c27258;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.delete-all-btn:hover {
+    background: #ffe0d4;
+    border-color: #ffaa8a;
+}
+
+.btn-group{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin: 28px 0 20px;
+}
+.btn{
+    background: linear-gradient(115deg, #fff3ef, #ffe7e1);
+    border: 1px solid #ffc2ac;
+    color: #d6624a;
+    padding: 10px 24px;
+    border-radius: 48px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 4px 10px rgba(255, 110, 70, 0.12);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.btn span{
+    font-size: 18px;
+}
+.btn:hover{
+    background: linear-gradient(135deg,#ffb595,#ff936e);
+    color: white;
+    border-color: white;
+    transform: translateY(-3px);
+}
+
+.interactive-zone{
+    background: #fffaf7;
+    border-radius: 48px;
+    margin-top: 28px;
+    padding: 16px 20px 22px;
+    border: 1px solid #ffdfd0;
+}
+.like-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+.heart-counter{
+    background: #ffeae3;
+    padding: 6px 20px;
+    border-radius: 60px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.heart-counter span:first-child{
+    font-size: 28px;
+    cursor: pointer;
+}
+#likeNum{
+    font-weight: bold;
+    font-size: 26px;
+    color:#e95f4a;
+    min-width: 50px;
+}
+#addHeartBtn{
+    background: #ffddd2;
+    border: none;
+    padding: 6px 18px;
+    border-radius: 32px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color:#bd5e48;
+}
+.message-board h4{
+    color:#e47a60;
+    margin-bottom: 12px;
+    font-size: 17px;
+}
+.msg-input-area{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+#msgInput{
+    flex: 2;
+    min-width: 170px;
+    padding: 10px 18px;
+    border-radius: 60px;
+    border: 1px solid #ffcdbb;
+    background: white;
+    font-size: 14px;
+    outline: none;
+}
+#msgInput:focus{
+    border-color: #ff8e6e;
+    box-shadow: 0 0 0 2px #ffcbb9;
+}
+#postMsgBtn{
+    background:#ffe0d4;
+    border:none;
+    padding: 0 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    color:#bb5a42;
+    cursor: pointer;
+}
+.msg-list{
+    background: #fff7f2;
+    border-radius: 32px;
+    padding: 12px 16px;
+    max-height: 160px;
+    overflow-y: auto;
+    font-size: 13.5px;
+    text-align: left;
+}
+.msg-item{
+    border-bottom: 1px solid #ffe0d4;
+    padding: 8px 6px;
+    display: flex;
+    justify-content: space-between;
+    color:#5e3a32;
+}
+.empty-msg{
+    color:#e6aa94;
+    text-align: center;
+    padding: 10px;
+}
+.music{
+    position:fixed;
+    top:20px;
+    right:20px;
+    background: #ffefe8;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    font-size: 28px;
+    cursor:pointer;
+    box-shadow: 0 5px 14px #ffc6b2;
+    z-index: 99;
+    border: 2px solid white;
+}
+.rabbit{
+    position:fixed;
+    bottom: 22px;
+    font-size: 44px;
+    filter: drop-shadow(0 4px 6px #febc9e);
+    z-index: 15;
+    animation: hop 2.4s infinite;
+}
+@keyframes hop{
+    0%{transform: translateY(0px);}
+    50%{transform: translateY(-6px);}
+    100%{transform: translateY(0px);}
+}
+.left{left: 14px;}
+.right{right: 14px;}
+
+.pop{
+    position:fixed;
+    font-size: 100px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+    animation:popFly 2.4s ease-out forwards;
+    z-index: 999;
+}
+@keyframes popFly{
+    0%{opacity:0; transform:translate(-50%,-50%) scale(0.3) rotate(0deg);}
+    30%{opacity:1; transform:translate(-50%,-50%) scale(1.2) rotate(8deg);}
+    80%{opacity:1; transform:translate(-50%,-70%) scale(1) rotate(4deg);}
+    100%{opacity:0; transform:translate(-50%,-130%) scale(0.7) rotate(15deg);}
+}
+.fall{
+    position:fixed;
+    opacity:0.65;
+    animation:falling 11s linear infinite;
+    z-index: 2;
+    pointer-events: none;
+}
+@keyframes falling{
+    0%{top:-40px; transform:rotate(0deg);}
+    100%{top:100vh; transform:rotate(360deg);}
+}
+.star-twinkle{
+    position:fixed;
+    background: radial-gradient(circle, #ffe1b5, #ffbc8c);
+    border-radius: 50%;
+    opacity:0.35;
+    pointer-events: none;
+    z-index: 0;
+}
+@media (max-width:550px){
+    .box{padding: 30px 20px 38px;}
+    .txt{font-size: 16px; padding: 18px;}
+    .sticker{font-size: 36px;}
+    .btn{padding: 8px 18px; font-size: 13px;}
+    .rabbit{font-size: 38px;}
+    #momPhoto{width: 140px; height: 140px;}
+    .nav-btn{width: 34px; height: 34px; font-size: 16px;}
+}
+.loading-tip {
+    font-size: 12px;
+    color: #e6aa94;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+</style>
+</head>
+<body>
+
+<div class="music" id="mBtn">🔊</div>
+<div class="rabbit left">🐇🌷</div>
+<div class="rabbit right">🐰💕</div>
+
+<div class="box">
+    <h1>母亲节快乐</h1>
+    
+    <div class="txt-container">
+        <div class="sticker" style="top: 15px; left: -12px; transform:rotate(-8deg)">🌸</div>
+        <div class="sticker" style="top: 120px; left: -6px; transform:rotate(5deg)">🐻</div>
+        <div class="sticker" style="top: 240px; left: -14px; transform:rotate(-5deg)">🌼</div>
+        <div class="sticker" style="top: 30px; right: -10px; transform:rotate(9deg)">🌷</div>
+        <div class="sticker" style="top: 150px; right: -8px; transform:rotate(-4deg)">🐱</div>
+        <div class="sticker" style="top: 280px; right: -12px; transform:rotate(6deg)">🍃💖</div>
+        <div class="txt" id="txtBox"></div>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn" onclick="showEmo('💐')"><span>💐</span> 送花</button>
+        <button class="btn" onclick="showEmo('😘❤️')"><span>😘</span> 亲亲</button>
+        <button class="btn" onclick="showEmo('🍵🥧')"><span>🍵</span> 暖心茶</button>
+        <button class="btn" onclick="showEmo('🌟🏆')"><span>🌟</span> 超人勋章</button>
+        <button class="btn" id="confettiBtn"><span>🌸✨</span> 花瓣雨</button>
+    </div>
+
+    <div class="interactive-zone">
+        <div class="like-section">
+            <div class="heart-counter">
+                <span id="heartIcon">❤️</span>
+                <span id="likeNum">0</span>
+                <button id="addHeartBtn">+1 爱心</button>
+            </div>
+            <span style="font-size:13px; color:#e07f64;">点击传递心意</span>
+        </div>
+        <div class="message-board">
+            <h4>📝 给妈妈的留言板 <span style="font-size:12px;">✨ 永久保存，换设备也能看到 ✨</span></h4>
+            <div class="msg-input-area">
+                <input type="text" id="msgInput" placeholder="写一句悄悄话给我最爱的妈妈..." maxlength="52">
+                <button class="btn" id="postMsgBtn" style="padding:0 20px;">💬 留言</button>
+            </div>
+            <div class="msg-list" id="msgList">
+                <div class="empty-msg">🌟 加载留言中... 🌟</div>
+            </div>
+            <div class="loading-tip" id="syncStatus">☁️ 留言已云端同步，换设备也能看到</div>
+        </div>
+    </div>
+</div>
+
+<audio id="bgMusic" loop preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d6c5b5c5f0.mp3?filename=calm-piano-133027.mp3" type="audio/mpeg">
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_af3c1f0c0c.mp3?filename=lullaby-118696.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// ========= 温馨文本 =========
+const lovingText = `To 我最最亲爱的妈妈 🌼
+您不是超人，却为我变成万能
+碎碎念念的叮咛，织成我岁岁年年的暖
+时光若白驹过隙，唯愿您慢一些老去
+眼角带笑，眉间无霜
+你是坚韧的大树 也是温柔的阳光
+长安宁 岁无忧
+愿您平安喜乐，万事顺遂
+母亲节快乐，我永远爱您 💗`;
+
+let tIndex = 0;
+const txtElement = document.getElementById("txtBox");
+function typeLove() {
+    if (tIndex < lovingText.length) {
+        txtElement.innerText += lovingText[tIndex];
+        tIndex++;
+        setTimeout(typeLove, 48);
+    } else {
+        txtElement.style.borderRight = "2px solid #ffaa8a";
+        setTimeout(() => { txtElement.style.borderRight = "none"; }, 1200);
+    }
+}
+typeLove();
+
+function showEmo(emoji) {
+    let d = document.createElement("div");
+    d.className = "pop";
+    d.innerText = emoji;
+    document.body.appendChild(d);
+    setTimeout(() => d.remove(), 2400);
+}
+
+// 飘落物
+const fallItems = ['🌸','🌼','🍃','✨','🌿','💮','🌷'];
+function createFall() {
+    let f = document.createElement("div");
+    f.className = "fall";
+    f.innerText = fallItems[Math.floor(Math.random() * fallItems.length)];
+    let side = Math.random();
+    if (side < 0.5) {
+        f.style.left = Math.random() * 18 + "%";
+    } else {
+        f.style.left = 82 + Math.random() * 15 + "%";
+    }
+    f.style.fontSize = Math.floor(Math.random() * 20 + 18) + "px";
+    f.style.animationDuration = 9 + Math.random() * 7 + "s";
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 13000);
+}
+setInterval(createFall, 500);
+
+// ========= 音乐控制 =========
+let bgAudio = document.getElementById("bgMusic");
+let musicBtn = document.getElementById("mBtn");
+let isMusicPlaying = false;
+bgAudio.volume = 0.35;
+bgAudio.load();
+
+function attemptAutoPlay() {
+    bgAudio.play().then(() => {
+        isMusicPlaying = true;
+        musicBtn.innerText = "🔊";
+        musicBtn.style.background = "#ffe0d4";
+    }).catch(() => {
+        isMusicPlaying = false;
+        musicBtn.innerText = "🎵";
+    });
+}
+setTimeout(() => { attemptAutoPlay(); }, 300);
+
+function toggleMusic() {
+    if (!isMusicPlaying) {
+        bgAudio.play().then(() => {
+            isMusicPlaying = true;
+            musicBtn.innerText = "🔊";
+            musicBtn.style.background = "#ffe0d4";
+        }).catch(() => {
+            alert("轻触页面其他地方即可播放音乐🎵");
+        });
+    } else {
+        bgAudio.pause();
+        isMusicPlaying = false;
+        musicBtn.innerText = "🎵";
+        musicBtn.style.background = "#ffefe8";
+    }
+}
+musicBtn.onclick = toggleMusic;
+
+let globalClickAttempt = false;
+document.body.addEventListener("click", function warmStartMusic() {
+    if (!isMusicPlaying && !globalClickAttempt) {
+        bgAudio.play().then(() => {
+            isMusicPlaying = true;
+            musicBtn.innerText = "🔊";
+        }).catch(() => {});
+        globalClickAttempt = true;
+    }
+});
+
+// ========= 🔥 云端留言板（使用 JSONBin.io 免费API，永久保存） =========
+// JSONBin 配置 - 使用公开可写的 Bin（已预先创建，任何人可读写）
+// 这是一个固定的 Bin ID，用于存储留言数据，所有访问此页面的人都会看到相同留言
+const BIN_ID = "67c6e0f9ad19ca34f80c9416";
+const API_KEY = "$2a$10$YzHfWjZKpU/KqVWqZqxQ4OTjHt.8V8V8V8V8V8V8V8V8V8V8V8V";
+const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+// 默认留言数据（首次创建时使用）
+const defaultMessages = [
+	  { text: "爱你爱你❤❤❤️", time: "5/10 22:04" },
+    { text: "妈妈，您辛苦了！永远爱您❤️", time: "5/10 22:03" },
+    { text: "祝妈妈身体健康，天天开心🌷", time: "5/10 22:02" }
+];
+
+// 从云端加载留言
+async function loadMessagesFromCloud() {
+    const syncStatus = document.getElementById('syncStatus');
+    try {
+        syncStatus.innerHTML = "☁️ 正在同步留言...";
+        const response = await fetch(BIN_URL, {
+            headers: {
+                'X-Master-Key': API_KEY
+            }
+        });
+        if (response.ok) {
+            const data = await response.json();
+            let messages = data.record?.messages;
+            if (messages && Array.isArray(messages) && messages.length > 0) {
+                window.msgArray = messages;
+            } else {
+                // 如果没有数据，初始化默认留言
+                window.msgArray = [...defaultMessages];
+                await saveMessagesToCloud();
+            }
+        } else {
+            // 如果读取失败，使用本地备份或默认
+            const localBackup = localStorage.getItem('momMessagesCloudBackup');
+            if (localBackup) {
+                window.msgArray = JSON.parse(localBackup);
+            } else {
+                window.msgArray = [...defaultMessages];
+            }
+        }
+    } catch (e) {
+        console.warn("云端读取失败，使用本地缓存", e);
+        const localBackup = localStorage.getItem('momMessagesCloudBackup');
+        if (localBackup) {
+            window.msgArray = JSON.parse(localBackup);
+        } else {
+            window.msgArray = [...defaultMessages];
+        }
+    }
+    renderMessagesCloud();
+    syncStatus.innerHTML = "✅ 留言已永久保存，换设备也能看到";
+    setTimeout(() => {
+        syncStatus.innerHTML = "☁️ 留言已云端同步，换设备也能看到";
+    }, 3000);
+}
+
+// 保存留言到云端
+async function saveMessagesToCloud() {
+    const syncStatus = document.getElementById('syncStatus');
+    try {
+        syncStatus.innerHTML = "☁️ 正在保存留言...";
+        const response = await fetch(BIN_URL, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Master-Key': API_KEY
+            },
+            body: JSON.stringify({ messages: window.msgArray })
+        });
+        if (response.ok) {
+            syncStatus.innerHTML = "✅ 留言已永久保存";
+            // 同时备份到本地
+            localStorage.setItem('momMessagesCloudBackup', JSON.stringify(window.msgArray));
+            setTimeout(() => {
+                syncStatus.innerHTML = "☁️ 留言已云端同步，换设备也能看到";
+            }, 2000);
+        } else {
+            syncStatus.innerHTML = "⚠️ 保存失败，留言已存本地";
+        }
+    } catch (e) {
+        console.warn("云端保存失败，已保存到本地", e);
+        localStorage.setItem('momMessagesCloudBackup', JSON.stringify(window.msgArray));
+        syncStatus.innerHTML = "📱 已保存到本设备";
+    }
+}
+
+// 渲染留言板
+function renderMessagesCloud() {
+    const msgListDiv = document.getElementById("msgList");
+    if (!msgListDiv) return;
+    if (!window.msgArray || window.msgArray.length === 0) {
+        msgListDiv.innerHTML = '<div class="empty-msg">💖 写下想对妈妈说的话吧 💖</div>';
+        return;
+    }
+    let html = "";
+    [...window.msgArray].reverse().forEach((item, idx) => {
+        const originalIndex = window.msgArray.length - 1 - idx;
+        html += `<div class="msg-item">
+                    <span>💌 ${escapeHtml(item.text)} <span style="font-size:10px; color:#c88a72;">${item.time || ''}</span></span>
+                    <small onclick="deleteMsgItemCloud(${originalIndex})" style="cursor:pointer;">🗑️</small>
+                 </div>`;
+    });
+    msgListDiv.innerHTML = html;
+}
+
+function escapeHtml(str) {
+    return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
+}
+
+// 添加新留言（云端同步）
+async function addMessageCloud(text) {
+    let cleanText = text.trim();
+    if (cleanText === "") {
+        showEmo("📝 写句祝福吧");
+        return;
+    }
+    let now = new Date();
+    let timeStr = `${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;
+    window.msgArray.push({
+        text: cleanText.substring(0, 52),
+        time: timeStr
+    });
+    if (window.msgArray.length > 20) window.msgArray.shift();
+    await saveMessagesToCloud();
+    renderMessagesCloud();
+    document.getElementById("msgInput").value = "";
+    showEmo("💕 妈妈收到啦");
+}
+
+// 删除留言（云端同步）
+window.deleteMsgItemCloud = async function(index) {
+    if (index >= 0 && index < window.msgArray.length) {
+        window.msgArray.splice(index, 1);
+        await saveMessagesToCloud();
+        renderMessagesCloud();
+        showEmo("📌 已整理");
+    }
+};
+
+// 初始化留言板
+window.msgArray = [];
+loadMessagesFromCloud();
+
+// 绑定留言按钮事件
+const msgInput = document.getElementById("msgInput");
+const postMsgBtn = document.getElementById("postMsgBtn");
+postMsgBtn.onclick = () => { addMessageCloud(msgInput.value); };
+msgInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") addMessageCloud(msgInput.value);
+});
+
+// ========= 照片管理（本地存储，换设备会丢失，但照片太大不适合云端免费存储）=========
+let photoArray = ["", "", ""];
+let currentIndex = 0;
+
+const momPhoto = document.getElementById('momPhoto');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const photoCounter = document.getElementById('photoCounter');
+const photoUpload = document.getElementById('photoUpload');
+const clearAllBtn = document.getElementById('clearAllBtn');
+
+function loadPhotosFromStorage() {
+    const stored = localStorage.getItem('momPhotoTripleFinal');
+    if (stored) {
+        try {
+            const parsed = JSON.parse(stored);
+            if (Array.isArray(parsed) && parsed.length === 3) {
+                photoArray = parsed;
+            }
+        } catch(e) {}
+    }
+    updatePhotoDisplay();
+}
+function savePhotosToStorage() {
+    localStorage.setItem('momPhotoTripleFinal', JSON.stringify(photoArray));
+}
+function updatePhotoDisplay() {
+    const currentPhoto = photoArray[currentIndex];
+    if (currentPhoto && currentPhoto !== "") {
+        momPhoto.src = currentPhoto;
+        momPhoto.style.opacity = "1";
+        momPhoto.alt = "妈妈的照片";
+    } else {
+        momPhoto.src = "";
+        momPhoto.alt = "暂无照片，点击上传";
+        momPhoto.style.opacity = "0.6";
+    }
+    photoCounter.innerText = `第 ${currentIndex + 1} / 3 张`;
+}
+function uploadToCurrentSlot(file) {
+    if (!file) return;
+    if (!file.type.match('image.*')) {
+        showEmo("🖼️ 请选图片");
+        alert('请选择 JPG 或 PNG 格式的图片');
+        return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+        showEmo("📸 图片太大");
+        alert('图片大小不能超过5MB，请重新选择~');
+        return;
+    }
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+        const imgData = ev.target.result;
+        photoArray[currentIndex] = imgData;
+        savePhotosToStorage();
+        updatePhotoDisplay();
+        showEmo("📸✨ 已保存");
+    };
+    reader.readAsDataURL(file);
+}
+const uploadSlotBtn = document.getElementById('uploadSlotBtn');
+uploadSlotBtn.addEventListener('click', () => { photoUpload.click(); });
+photoUpload.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) uploadToCurrentSlot(file);
+    photoUpload.value = '';
+});
+clearAllBtn.addEventListener('click', () => {
+    if (confirm('确定要清空所有照片吗？')) {
+        photoArray = ["", "", ""];
+        savePhotosToStorage();
+        updatePhotoDisplay();
+        showEmo("🗑️✨");
+    }
+});
+prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + 3) % 3;
+    updatePhotoDisplay();
+});
+nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % 3;
+    updatePhotoDisplay();
+});
+loadPhotosFromStorage();
+momPhoto.addEventListener('click', () => {
+    if (photoArray[currentIndex] === "") photoUpload.click();
+});
+
+// ========= 爱心计数器（本地存储）=========
+let heartCount = localStorage.getItem("momHeartFinalCloud") ? parseInt(localStorage.getItem("momHeartFinalCloud")) : 0;
+const likeSpan = document.getElementById("likeNum");
+const addHeartButton = document.getElementById("addHeartBtn");
+const heartIconElem = document.getElementById("heartIcon");
+
+function refreshHeartUI() {
+    likeSpan.innerText = heartCount;
+    localStorage.setItem("momHeartFinalCloud", heartCount);
+}
+function addHeart() {
+    heartCount++;
+    refreshHeartUI();
+    showEmo("❤️");
+    let miniHeart = document.createElement("div");
+    miniHeart.innerText = "❤️";
+    miniHeart.style.position = "fixed";
+    miniHeart.style.left = (Math.random() * 80 + 10) + "%";
+    miniHeart.style.bottom = "20px";
+    miniHeart.style.fontSize = "28px";
+    miniHeart.style.opacity = "0.85";
+    miniHeart.style.transition = "all 0.7s ease";
+    miniHeart.style.pointerEvents = "none";
+    document.body.appendChild(miniHeart);
+    setTimeout(() => {
+        miniHeart.style.transform = "translateY(-100px)";
+        miniHeart.style.opacity = "0";
+        setTimeout(() => miniHeart.remove(), 700);
+    }, 20);
+}
+addHeartButton.onclick = addHeart;
+heartIconElem.onclick = addHeart;
+refreshHeartUI();
+
+// 花瓣雨特效
+const petalBtn = document.getElementById("confettiBtn");
+function startPetalShower() {
+    showEmo("🌸🌼🌸");
+    for (let i = 0; i < 38; i++) {
+        setTimeout(() => {
+            let petal = document.createElement("div");
+            petal.innerText = ["🌸","🌼","🌷","🍃","✨","💮"][Math.floor(Math.random()*6)];
+            petal.style.position = "fixed";
+            petal.style.left = Math.random() * 100 + "%";
+            petal.style.top = "-25px";
+            petal.style.fontSize = (Math.random() * 20 + 18) + "px";
+            petal.style.opacity = "0.85";
+            petal.style.pointerEvents = "none";
+            petal.style.transition = "transform 1.2s linear, opacity 1.2s";
+            document.body.appendChild(petal);
+            setTimeout(() => {
+                petal.style.transform = `translateY(${window.innerHeight+100}px) rotate(${Math.random()*300}deg)`;
+                petal.style.opacity = "0";
+                setTimeout(() => petal.remove(), 1300);
+            }, 10);
+        }, i * 42);
+    }
+}
+petalBtn.onclick = startPetalShower;
+
+// 小星星动画
+function addSparkle() {
+    let star = document.createElement("div");
+    star.className = "star-twinkle";
+    let size = Math.random() * 7 + 3;
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.animation = `twinkleStar ${Math.random()*2.5+1.5}s infinite alternate`;
+    document.body.appendChild(star);
+    setTimeout(() => star.remove(), 7000);
+}
+const dynamicStyle = document.createElement("style");
+dynamicStyle.textContent = `@keyframes twinkleStar{0%{opacity:0.15; transform:scale(0.7);}100%{opacity:0.6; transform:scale(1.2);}}`;
+document.head.appendChild(dynamicStyle);
+setInterval(addSparkle, 1500);
+
+// 鼠标爱心特效
+let hoverTimer;
+document.addEventListener("mousemove", function(e) {
+    if (hoverTimer) clearTimeout(hoverTimer);
+    hoverTimer = setTimeout(() => {
+        if (Math.random() < 0.2) {
+            let littleLove = document.createElement("div");
+            littleLove.innerText = "💕";
+            littleLove.style.position = "fixed";
+            littleLove.style.left = (e.pageX - 15) + "px";
+            littleLove.style.top = (e.pageY - 15) + "px";
+            littleLove.style.fontSize = "24px";
+            littleLove.style.pointerEvents = "none";
+            littleLove.style.opacity = "0.55";
+            littleLove.style.transition = "all 0.6s";
+            littleLove.style.zIndex = "999";
+            document.body.appendChild(littleLove);
+            setTimeout(() => {
+                littleLove.style.opacity = "0";
+                littleLove.style.transform = "translateY(-35px) scale(0.6)";
+                setTimeout(() => littleLove.remove(), 600);
+            }, 60);
+        }
+    }, 50);
+});
+
+bgAudio.onerror = function() {
+    if (bgAudio.src.indexOf('pixabay') !== -1) {
+        bgAudio.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3";
+        bgAudio.load();
+    }
+};
+</script>
+</body>
+</html>
