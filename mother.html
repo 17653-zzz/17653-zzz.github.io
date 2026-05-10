@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>母亲节快乐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #000;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .item {
+            position: absolute;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 16px;
+            opacity: 0;
+            transform: scale(0.6);
+            animation: show 0.6s ease forwards;
+        }
+        @keyframes show {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .c1 {background: #ff69b4; color: #fff;}
+        .c2 {background: #87cefa; color: #fff;}
+        .c3 {background: #96e6a1; color: #fff;}
+        .c4 {background: #ffd700; color: #333;}
+    </style>
+</head>
+<body>
+<div id="box"></div>
+
+<script>
+// 文案可以随便改，格式别动
+let textArr = [
+    "母亲节快乐",
+    "妈妈我爱你",
+    "愿妈妈平安健康",
+    "岁月温柔待妈妈",
+    "谢谢您陪我长大",
+    "妈妈永远最美"
+];
+let colorArr = ["c1","c2","c3","c4"];
+let box = document.getElementById("box");
+
+function addText(){
+    let txt = textArr[Math.floor(Math.random()*textArr.length)];
+    let col = colorArr[Math.floor(Math.random()*colorArr.length)];
+
+    let div = document.createElement("div");
+    div.className = "item " + col;
+    div.innerText = txt;
+
+    // 随机位置
+    div.style.left = Math.random()*85 + "%";
+    div.style.top = Math.random()*85 + "%";
+
+    box.appendChild(div);
+}
+
+// 每隔1.2秒弹出一个
+setInterval(addText,1200);
+</script>
+</body>
+</html>
