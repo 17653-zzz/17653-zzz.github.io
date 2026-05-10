@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<title>母亲节快乐 · 温柔茉莉版</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    background: linear-gradient(145deg, #fff0ea 0%, #ffe6e8 100%);
+    font-family:'Segoe UI', 'Quicksand', system-ui, '微软雅黑', 'Poppins', sans-serif;
+    min-height:100vh;
+    padding:25px 18px;
+    position:relative;
+    overflow-x:hidden;
+}
+
+/* 主卡片 温润如玉 */
+.box{
+    width:100%;
+    max-width:720px;
+    margin:20px auto 50px;
+    background: rgba(255, 253, 251, 0.98);
+    border-radius: 56px;
+    padding: 45px 38px 55px;
+    border: 1px solid rgba(255, 185, 155, 0.6);
+    box-shadow: 0 20px 40px rgba(255, 125, 100, 0.12), 0 0 0 6px #fffaf8, 0 0 0 10px #ffcdbc;
+    text-align:center;
+}
+
+h1{
+    font-size: 38px;
+    background: linear-gradient(135deg, #e96a70, #ff8f6a);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+h1:after{
+    content:"🌼";
+    font-size: 38px;
+    background: none;
+    color: #ff9f7a;
+}
+
+/* 文字容器 */
+.txt-container {
+    position: relative;
+    min-height: 380px;
+    padding: 8px 20px;
+    margin: 12px 0;
+}
+.txt{
+    font-size: 18px;
+    line-height: 2.1;
+    color: #4b2e2c;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    background: #fffbf9;
+    padding: 22px 26px;
+    border-radius: 48px;
+    box-shadow: inset 0 1px 4px #ffe0d4, 0 12px 20px rgba(255, 125, 90, 0.12);
+    text-align: center;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: 'Quicksand', '微软雅黑', sans-serif;
+}
+
+/* 贴纸精简雅致 */
+.sticker {
+    position: absolute;
+    font-size: 44px;
+    filter: drop-shadow(2px 5px 10px rgba(0,0,0,0.08));
+    animation: gentleFloat 5s infinite ease-in-out;
+    cursor: default;
+    z-index: 10;
+}
+@keyframes gentleFloat{
+    0%{transform: translateY(0px) rotate(0deg);}
+    50%{transform: translateY(-5px) rotate(2deg);}
+    100%{transform: translateY(0px) rotate(0deg);}
+}
+
+/* 按钮区 */
+.btn-group{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin: 28px 0 20px;
+}
+.btn{
+    background: linear-gradient(115deg, #fff3ef, #ffe7e1);
+    border: 1px solid #ffc2ac;
+    color: #d6624a;
+    padding: 10px 24px;
+    border-radius: 48px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 4px 10px rgba(255, 110, 70, 0.12);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.btn span{
+    font-size: 18px;
+}
+.btn:hover{
+    background: linear-gradient(135deg,#ffb595,#ff936e);
+    color: white;
+    border-color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px rgba(255,100,70,0.25);
+}
+
+/* 爱心&留言板 */
+.interactive-zone{
+    background: #fffaf7;
+    border-radius: 48px;
+    margin-top: 28px;
+    padding: 16px 20px 22px;
+    border: 1px solid #ffdfd0;
+}
+.like-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+.heart-counter{
+    background: #ffeae3;
+    padding: 6px 20px;
+    border-radius: 60px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.heart-counter span:first-child{
+    font-size: 28px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+#likeNum{
+    font-weight: bold;
+    font-size: 26px;
+    color:#e95f4a;
+    min-width: 50px;
+}
+#addHeartBtn{
+    background: #ffddd2;
+    border: none;
+    padding: 6px 18px;
+    border-radius: 32px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color:#bd5e48;
+}
+.message-board h4{
+    color:#e47a60;
+    margin-bottom: 12px;
+    font-size: 17px;
+}
+.msg-input-area{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+#msgInput{
+    flex: 2;
+    min-width: 170px;
+    padding: 10px 18px;
+    border-radius: 60px;
+    border: 1px solid #ffcdbb;
+    background: white;
+    font-size: 14px;
+    outline: none;
+}
+#msgInput:focus{
+    border-color: #ff8e6e;
+    box-shadow: 0 0 0 2px #ffcbb9;
+}
+#postMsgBtn{
+    background:#ffe0d4;
+    border:none;
+    padding: 0 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    color:#bb5a42;
+    cursor: pointer;
+}
+.msg-list{
+    background: #fff7f2;
+    border-radius: 32px;
+    padding: 12px 16px;
+    max-height: 130px;
+    overflow-y: auto;
+    font-size: 13.5px;
+    text-align: left;
+}
+.msg-item{
+    border-bottom: 1px solid #ffe0d4;
+    padding: 8px 6px;
+    display: flex;
+    justify-content: space-between;
+    color:#5e3a32;
+}
+.empty-msg{
+    color:#e6aa94;
+    text-align: center;
+    padding: 10px;
+}
+.music{
+    position:fixed;
+    top:20px;
+    right:20px;
+    background: #ffefe8;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    font-size: 28px;
+    cursor:pointer;
+    box-shadow: 0 5px 14px #ffc6b2;
+    z-index: 99;
+    border: 2px solid white;
+}
+.rabbit{
+    position:fixed;
+    bottom: 22px;
+    font-size: 44px;
+    filter: drop-shadow(0 4px 6px #febc9e);
+    z-index: 15;
+    animation: hop 2.4s infinite;
+}
+@keyframes hop{
+    0%{transform: translateY(0px);}
+    50%{transform: translateY(-6px);}
+    100%{transform: translateY(0px);}
+}
+.left{left: 14px;}
+.right{right: 14px;}
+
+.pop{
+    position:fixed;
+    font-size: 100px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+    animation:popFly 2.4s ease-out forwards;
+    z-index: 999;
+    filter: drop-shadow(0 0 8px #ffb38b);
+}
+@keyframes popFly{
+    0%{opacity:0; transform:translate(-50%,-50%) scale(0.3) rotate(0deg);}
+    30%{opacity:1; transform:translate(-50%,-50%) scale(1.2) rotate(8deg);}
+    80%{opacity:1; transform:translate(-50%,-70%) scale(1) rotate(4deg);}
+    100%{opacity:0; transform:translate(-50%,-130%) scale(0.7) rotate(15deg);}
+}
+.fall{
+    position:fixed;
+    opacity:0.65;
+    animation:falling 11s linear infinite;
+    z-index: 2;
+    pointer-events: none;
+}
+@keyframes falling{
+    0%{top:-40px; transform:rotate(0deg);}
+    100%{top:100vh; transform:rotate(360deg);}
+}
+.star-twinkle{
+    position:fixed;
+    background: radial-gradient(circle, #ffe1b5, #ffbc8c);
+    border-radius: 50%;
+    opacity:0.35;
+    pointer-events: none;
+    z-index: 0;
+}
+@media (max-width:550px){
+    .box{padding: 30px 20px 38px;}
+    .txt{font-size: 16px; padding: 18px;}
+    .sticker{font-size: 36px;}
+    .btn{padding: 8px 18px; font-size: 13px;}
+    .rabbit{font-size: 38px;}
+}
+</style>
+</head>
+<body>
+
+<div class="music" id="mBtn">🎵</div>
+<div class="rabbit left">🐇🌷</div>
+<div class="rabbit right">🐰💕</div>
+
+<div class="box">
+    <h1>母亲节快乐</h1>
+    
+    <div class="txt-container">
+        <div class="sticker" style="top: 15px; left: -12px; transform:rotate(-8deg)">🌸</div>
+        <div class="sticker" style="top: 120px; left: -6px; transform:rotate(5deg)">🐻</div>
+        <div class="sticker" style="top: 240px; left: -14px; transform:rotate(-5deg)">🌼</div>
+        <div class="sticker" style="top: 30px; right: -10px; transform:rotate(9deg)">🌷</div>
+        <div class="sticker" style="top: 150px; right: -8px; transform:rotate(-4deg)">🐱</div>
+        <div class="sticker" style="top: 280px; right: -12px; transform:rotate(6deg)">🍃💖</div>
+        <div class="txt" id="txtBox"></div>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn" onclick="showEmo('💐')"><span>💐</span> 送花</button>
+        <button class="btn" onclick="showEmo('😘❤️')"><span>😘</span> 亲亲</button>
+        <button class="btn" onclick="showEmo('🍵🥧')"><span>🍵</span> 暖心茶</button>
+        <button class="btn" onclick="showEmo('🌟🏆')"><span>🌟</span> 超人勋章</button>
+        <button class="btn" id="confettiBtn"><span>🌸✨</span> 花瓣雨</button>
+    </div>
+
+    <div class="interactive-zone">
+        <div class="like-section">
+            <div class="heart-counter">
+                <span id="heartIcon">❤️</span>
+                <span id="likeNum">0</span>
+                <button id="addHeartBtn">+1 爱心</button>
+            </div>
+            <span style="font-size:13px; color:#e07f64;">点击传递心意</span>
+        </div>
+        <div class="message-board">
+            <h4>📝 给妈妈的留言板 ✨</h4>
+            <div class="msg-input-area">
+                <input type="text" id="msgInput" placeholder="写一句悄悄话给我最爱的妈妈..." maxlength="52">
+                <button class="btn" id="postMsgBtn" style="padding:0 20px;">💬 留言</button>
+            </div>
+            <div class="msg-list" id="msgList">
+                <div class="empty-msg">🌟 点击留言，把爱存下来 🌟</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 新配乐：小茉莉（轻纯音乐，温暖治愈） 使用更可靠的高质量外链 -->
+<audio id="bgMusic" loop preload="auto">
+    <source src="https://dl.sndup.net/2qqt/little_jasmine.mp3" type="audio/mpeg">
+    <!-- 备选链接1：稳定纯音乐(夏夜萤火虫) 以防主链接失效 -->
+    <source src="https://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3" type="audio/mpeg">
+    您的浏览器不支持音频，但祝福不减 ❤️
+</audio>
+
+<script>
+// 温馨文本内容 (温润如茉莉)
+const lovingText = `To 我最最亲爱的妈妈 🌼
+您不是超人，却为我变成万能
+碎碎念念的叮咛，织成我岁岁年年的暖
+时光若白驹过隙，唯愿您慢一些老去
+眼角带笑，眉间无霜
+你是坚韧的大树 也是温柔的阳光
+长安宁 岁无忧
+愿您平安喜乐，万事顺遂
+母亲节快乐，我永远爱您 💗`;
+
+let tIndex = 0;
+const txtElement = document.getElementById("txtBox");
+function typeLove() {
+    if (tIndex < lovingText.length) {
+        txtElement.innerText += lovingText[tIndex];
+        tIndex++;
+        setTimeout(typeLove, 48);
+    } else {
+        txtElement.style.borderRight = "2px solid #ffaa8a";
+        setTimeout(() => { txtElement.style.borderRight = "none"; }, 1200);
+    }
+}
+typeLove();
+
+function showEmo(emoji) {
+    let d = document.createElement("div");
+    d.className = "pop";
+    d.innerText = emoji;
+    document.body.appendChild(d);
+    setTimeout(() => d.remove(), 2400);
+}
+
+const fallItems = ['🌸','🌼','🍃','✨','🐚','🌿','💮'];
+function createFall() {
+    let f = document.createElement("div");
+    f.className = "fall";
+    f.innerText = fallItems[Math.floor(Math.random() * fallItems.length)];
+    let side = Math.random();
+    if (side < 0.5) {
+        f.style.left = Math.random() * 18 + "%";
+    } else {
+        f.style.left = 82 + Math.random() * 15 + "%";
+    }
+    f.style.fontSize = Math.floor(Math.random() * 18 + 18) + "px";
+    f.style.animationDuration = 9 + Math.random() * 7 + "s";
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 13000);
+}
+setInterval(createFall, 500);
+
+// 新配乐控制 (小茉莉)
+let bgAudio = document.getElementById("bgMusic");
+let musicBtn = document.getElementById("mBtn");
+let isMusicPlaying = false;
+bgAudio.volume = 0.28;  // 轻柔音量
+
+function toggleMusic() {
+    if (!isMusicPlaying) {
+        bgAudio.play().then(() => {
+            isMusicPlaying = true;
+            musicBtn.innerText = "🔊";
+        }).catch((err) => {
+            console.log("音频自动播放受限，等待用户显式交互");
+            isMusicPlaying = false;
+            musicBtn.innerText = "🎵";
+        });
+    } else {
+        bgAudio.pause();
+        isMusicPlaying = false;
+        musicBtn.innerText = "🎵";
+    }
+}
+musicBtn.onclick = toggleMusic;
+
+// 首次点击页面温柔开启音乐（尊重新闻策略）
+let firstClickDone = false;
+document.body.addEventListener("click", function initAudio() {
+    if (!isMusicPlaying && !firstClickDone) {
+        bgAudio.play().then(() => {
+            isMusicPlaying = true;
+            musicBtn.innerText = "🔊";
+        }).catch(() => {});
+        firstClickDone = true;
+    }
+}, { once: true });
+
+// ---------- 爱心计数器 ----------
+let heartCount = localStorage.getItem("momHeartJasmine") ? parseInt(localStorage.getItem("momHeartJasmine")) : 0;
+const likeSpan = document.getElementById("likeNum");
+const addHeartButton = document.getElementById("addHeartBtn");
+const heartIconElem = document.getElementById("heartIcon");
+
+function refreshHeartUI() {
+    likeSpan.innerText = heartCount;
+    localStorage.setItem("momHeartJasmine", heartCount);
+    if (heartCount > 0) {
+        heartIconElem.style.transform = "scale(1.1)";
+        setTimeout(() => { heartIconElem.style.transform = "scale(1)"; }, 200);
+    }
+}
+
+function addHeart() {
+    heartCount++;
+    refreshHeartUI();
+    showEmo("❤️");
+    let miniHeart = document.createElement("div");
+    miniHeart.innerText = "❤️";
+    miniHeart.style.position = "fixed";
+    miniHeart.style.left = (Math.random() * 80 + 10) + "%";
+    miniHeart.style.bottom = "20px";
+    miniHeart.style.fontSize = "28px";
+    miniHeart.style.opacity = "0.85";
+    miniHeart.style.transition = "all 0.7s ease";
+    miniHeart.style.pointerEvents = "none";
+    miniHeart.style.zIndex = "80";
+    document.body.appendChild(miniHeart);
+    setTimeout(() => {
+        miniHeart.style.transform = "translateY(-100px)";
+        miniHeart.style.opacity = "0";
+        setTimeout(() => miniHeart.remove(), 700);
+    }, 20);
+}
+
+addHeartButton.onclick = addHeart;
+heartIconElem.onclick = addHeart;
+refreshHeartUI();
+
+// ---------- 留言板 ----------
+let msgArray = [];
+let storedMsgJasmine = localStorage.getItem("momMessagesJasmine");
+if (storedMsgJasmine) {
+    try {
+        msgArray = JSON.parse(storedMsgJasmine);
+    } catch(e) { msgArray = []; }
+}
+const msgListDiv = document.getElementById("msgList");
+const msgInput = document.getElementById("msgInput");
+const postMsgBtn = document.getElementById("postMsgBtn");
+
+function renderMessages() {
+    if (!msgListDiv) return;
+    if (msgArray.length === 0) {
+        msgListDiv.innerHTML = '<div class="empty-msg">💖 写下想对妈妈说的话吧 💖</div>';
+        return;
+    }
+    let html = "";
+    [...msgArray].reverse().forEach((item, idx) => {
+        let originalIndex = msgArray.length - 1 - idx;
+        html += `<div class="msg-item">
+                    <span>💌 ${escapeHtml(item.text)} <span style="font-size:10px; color:#c88a72;">${item.time || ''}</span></span>
+                    <small onclick="deleteMsgItem(${originalIndex})" style="cursor:pointer;">🗑️</small>
+                 </div>`;
+    });
+    msgListDiv.innerHTML = html;
+}
+
+function escapeHtml(str) {
+    return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
+}
+
+function addMessage(text) {
+    let cleanText = text.trim();
+    if (cleanText === "") {
+        showEmo("📝 写句祝福吧");
+        return;
+    }
+    let now = new Date();
+    let timeStr = `${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;
+    msgArray.push({
+        text: cleanText.substring(0, 52),
+        time: timeStr
+    });
+    if (msgArray.length > 14) msgArray.shift();
+    localStorage.setItem("momMessagesJasmine", JSON.stringify(msgArray));
+    renderMessages();
+    msgInput.value = "";
+    showEmo("💕 妈妈收到啦");
+}
+
+window.deleteMsgItem = function(index) {
+    if (index >= 0 && index < msgArray.length) {
+        msgArray.splice(index, 1);
+        localStorage.setItem("momMessagesJasmine", JSON.stringify(msgArray));
+        renderMessages();
+        showEmo("📌 轻轻整理，再写心意");
+    }
+};
+
+postMsgBtn.onclick = () => { addMessage(msgInput.value); };
+msgInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") addMessage(msgInput.value);
+});
+renderMessages();
+
+// 花瓣雨特效
+const petalBtn = document.getElementById("confettiBtn");
+function startPetalShower() {
+    showEmo("🌸🌼🌸");
+    for (let i = 0; i < 42; i++) {
+        setTimeout(() => {
+            let petal = document.createElement("div");
+            petal.innerText = ["🌸","🌼","🌷","🍃","✨","💮"][Math.floor(Math.random()*6)];
+            petal.style.position = "fixed";
+            petal.style.left = Math.random() * 100 + "%";
+            petal.style.top = "-25px";
+            petal.style.fontSize = (Math.random() * 20 + 18) + "px";
+            petal.style.opacity = "0.85";
+            petal.style.pointerEvents = "none";
+            petal.style.transition = "transform 1.2s linear, opacity 1.2s";
+            petal.style.zIndex = "95";
+            document.body.appendChild(petal);
+            setTimeout(() => {
+                petal.style.transform = `translateY(${window.innerHeight+100}px) rotate(${Math.random()*300}deg)`;
+                petal.style.opacity = "0";
+                setTimeout(() => petal.remove(), 1300);
+            }, 10);
+        }, i * 40);
+    }
+    for (let i=0;i<12;i++) {
+        setTimeout(() => {
+            let loveGlow = document.createElement("div");
+            loveGlow.innerText = "❤️";
+            loveGlow.style.position = "fixed";
+            loveGlow.style.left = Math.random()*80+10+"%";
+            loveGlow.style.top = "5px";
+            loveGlow.style.fontSize = "26px";
+            loveGlow.style.opacity = "0.7";
+            loveGlow.style.transition = "all 1s";
+            loveGlow.style.pointerEvents = "none";
+            document.body.appendChild(loveGlow);
+            setTimeout(() => {
+                loveGlow.style.transform = "translateY(90vh) rotate(15deg)";
+                loveGlow.style.opacity = "0";
+                setTimeout(() => loveGlow.remove(), 900);
+            }, 20);
+        }, i * 70);
+    }
+}
+if (petalBtn) petalBtn.onclick = startPetalShower;
+
+// 小星星动画
+function addSparkle() {
+    let star = document.createElement("div");
+    star.className = "star-twinkle";
+    let size = Math.random() * 7 + 3;
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.animation = `twinkleStar ${Math.random()*2.5+1.5}s infinite alternate`;
+    document.body.appendChild(star);
+    setTimeout(() => star.remove(), 7000);
+}
+const dynamicStyle = document.createElement("style");
+dynamicStyle.textContent = `@keyframes twinkleStar{0%{opacity:0.15; transform:scale(0.7);}100%{opacity:0.6; transform:scale(1.2);}}`;
+document.head.appendChild(dynamicStyle);
+setInterval(addSparkle, 1500);
+
+// 鼠标轻触爱心 (轻盈跟随)
+let hoverTimer;
+document.addEventListener("mousemove", function(e) {
+    if (hoverTimer) clearTimeout(hoverTimer);
+    hoverTimer = setTimeout(() => {
+        if (Math.random() < 0.2) {
+            let littleLove = document.createElement("div");
+            littleLove.innerText = "💕";
+            littleLove.style.position = "fixed";
+            littleLove.style.left = (e.pageX - 15) + "px";
+            littleLove.style.top = (e.pageY - 15) + "px";
+            littleLove.style.fontSize = "24px";
+            littleLove.style.pointerEvents = "none";
+            littleLove.style.opacity = "0.55";
+            littleLove.style.transition = "all 0.6s";
+            littleLove.style.zIndex = "999";
+            document.body.appendChild(littleLove);
+            setTimeout(() => {
+                littleLove.style.opacity = "0";
+                littleLove.style.transform = "translateY(-35px) scale(0.6)";
+                setTimeout(() => littleLove.remove(), 600);
+            }, 60);
+        }
+    }, 50);
+});
+
+// 若音频链接失效，不影响整个祝福体验；控制台不干扰
+bgAudio.onerror = function() {
+    console.log("备用配乐也很美~ 母亲节心意永远在线");
+    // 尝试换内置备用音频
+    if(bgAudio.src.indexOf('little_jasmine') !== -1) {
+        bgAudio.src = "https://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3";
+        bgAudio.load();
+    }
+};
+</script>
+</body>
+</html>
