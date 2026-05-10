@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>🎸 真的爱你 · 母亲节快乐</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'PingFang SC', 'KaiTi', '楷体', '华文楷体', 'Noto Sans SC', sans-serif;
+      background: linear-gradient(180deg, #fff5f0 0%, #ffeef4 35%, #fff8f0 65%, #fff0f5 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      position: relative;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    /* 背景装饰 */
+    .bg-stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .bg-stars span {
+      position: absolute;
+      font-size: 32px;
+      opacity: 0.35;
+      animation: twinkle 3s infinite alternate ease-in-out;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.25; transform: scale(1); }
+      100% { opacity: 0.5; transform: scale(1.15); }
+    }
+
+    .card {
+      position: relative;
+      z-index: 2;
+      background: #fffcf9;
+      border-radius: 50px;
+      box-shadow: 0 30px 50px rgba(233, 140, 110, 0.18), 0 12px 28px rgba(253, 180, 140, 0.28);
+      padding: 22px 14px 26px;
+      max-width: 460px;
+      width: 100%;
+      border: 2.5px solid #ffe6da;
+      margin: 10px 0;
+    }
+
+    /* ---- 音乐按钮 ---- */
+    .music-btn {
+      position: absolute;
+      top: 15px;
+      right: 18px;
+      background: #fff5ed;
+      border: 2px solid #fcc9aa;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(252, 150, 110, 0.25);
+      transition: 0.2s;
+      font-weight: bold;
+    }
+    .music-btn:active {
+      transform: scale(0.9);
+      background: #ffe8d5;
+    }
+    .music-btn.playing {
+      animation: musicGlow 0.8s infinite;
+      background: #ffe0d0;
+    }
+    @keyframes musicGlow {
+      0%, 100% { box-shadow: 0 0 8px #ffbb99; }
+      50% { box-shadow: 0 0 22px #ff9977; }
+    }
+
+    /* ---- 标题 ---- */
+    .header {
+      text-align: center;
+      margin-bottom: 4px;
+      padding-right: 40px;
+    }
+    .main-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #f78a9b, #f6a07c, #f9b282);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 3px;
+      line-height: 1.3;
+    }
+    .subtitle {
+      display: inline-block;
+      background: #fff2e5;
+      border-radius: 30px;
+      padding: 7px 22px;
+      font-weight: 600;
+      color: #c96b47;
+      font-size: 0.9rem;
+      margin-top: 4px;
+      border: 1.5px dashed #fcc2a3;
+    }
+
+    /* ---- 歌词滚动 ---- */
+    .lyrics-box {
+      background: linear-gradient(135deg, #fff8f0, #fff0e8);
+      border-radius: 24px;
+      padding: 12px 14px;
+      margin: 12px 0;
+      border: 2px solid #ffdcc5;
+      text-align: center;
+      max-height: 50px;
+      overflow: hidden;
+      position: relative;
+    }
+    .lyrics-text {
+      font-size: 0.9rem;
+      color: #8b5a42;
+      font-weight: bold;
+      font-style: italic;
+      animation: scrollLyrics 12s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes scrollLyrics {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    .lyrics-label {
+      font-size: 0.65rem;
+      color: #d49570;
+      margin-top: 2px;
+      text-align: center;
+    }
+
+    /* ---- 卡通角色 ---- */
+    .carousel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      margin: 12px 0 8px;
+      flex-wrap: wrap;
+    }
+    .carousel-item {
+      background: white;
+      border-radius: 26px;
+      padding: 5px 7px 3px;
+      box-shadow: 0 8px 14px rgba(252, 158, 112, 0.15);
+      cursor: pointer;
+      transition: 0.2s;
+      text-align: center;
+      border: 2px solid #ffe0cf;
+      min-width: 50px;
+    }
+    .carousel-item:active {
+      transform: scale(0.85);
+      background: #fff8f2;
+    }
+    .carousel-emoji {
+      font-size: 34px;
+      display: block;
+      filter: drop-shadow(0 4px 4px #fdb797);
+    }
+    .carousel-label {
+      font-size: 0.6rem;
+      font-weight: bold;
+      color: #b95d3f;
+    }
+
+    /* ---- 温暖语句 ---- */
+    .message-slider {
+      background: #fffaf4;
+      border-radius: 28px;
+      padding: 16px 12px;
+      margin: 10px 0 12px;
+      border: 2px solid #ffd8c2;
+      text-align: center;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .message-text {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: #5a4035;
+      font-weight: 500;
+    }
+    .message-author {
+      margin-top: 6px;
+      font-size: 0.75rem;
+      color: #cc7b5e;
+      font-style: italic;
+    }
+    .swipe-hint {
+      font-size: 0.6rem;
+      color: #dba88e;
+      margin-top: 3px;
+    }
+
+    /* ---- 妈妈小档案 ---- */
+    .mom-profile {
+      background: #fff7f0;
+      border-radius: 20px;
+      padding: 10px 8px;
+      margin: 8px 0 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      justify-content: center;
+      border: 1.5px solid #ffddcb;
+    }
+    .tag {
+      background: #ffede3;
+      border-radius: 16px;
+      padding: 4px 10px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      color: #b85336;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    /* ---- 爱心树 ---- */
+    .love-tree {
+      text-align: center;
+      margin: 12px 0;
+      background: #fffbf5;
+      border-radius: 24px;
+      padding: 14px 10px;
+      border: 2px dashed #fcd1b4;
+      cursor: pointer;
+    }
+    .tree-emoji {
+      font-size: 50px;
+      transition: 0.3s;
+      display: inline-block;
+    }
+    .tree-emoji.grow {
+      animation: treeGrow 0.6s ease;
+    }
+    @keyframes treeGrow {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+    .tree-text {
+      font-size: 0.8rem;
+      color: #b85d3f;
+      margin-top: 4px;
+      font-weight: bold;
+    }
+    .tree-hearts {
+      font-size: 1.5rem;
+      margin-top: 6px;
+      letter-spacing: 3px;
+    }
+
+    /* ---- 回忆时间轴 ---- */
+    .timeline {
+      background: #fffaf3;
+      border-radius: 24px;
+      padding: 14px 12px;
+      margin: 10px 0;
+      border: 2px solid #ffe3cf;
+    }
+    .timeline h4 {
+      text-align: center;
+      color: #c5613d;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 0;
+      border-bottom: 1px dotted #ffdac5;
+      font-size: 0.8rem;
+      color: #5c3f31;
+    }
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+    .timeline-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    /* ---- 我想对妈妈说的10件事 ---- */
+    .ten-things {
+      background: #fff9f3;
+      border-radius: 22px;
+      padding: 12px 10px;
+      margin: 10px 0;
+      border: 2px solid #ffe0ca;
+    }
+    .ten-things h4 {
+      text-align: center;
+      color: #c5613d;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+    }
+    .thing-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 0;
+      border-bottom: 1px dotted #ffdac5;
+      font-size: 0.8rem;
+      color: #5c3f31;
+    }
+    .thing-item:last-child {
+      border-bottom: none;
+    }
+    .thing-num {
+      background: #ffe3d2;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.65rem;
+      color: #c05532;
+      flex-shrink: 0;
+    }
+
+    /* ---- 给妈妈的信 ---- */
+    .letter-box {
+      background: #fffaf5;
+      border-radius: 22px;
+      border: 2px dashed #fac19c;
+      padding: 10px 12px;
+      margin: 8px 0;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .letter-title {
+      font-weight: bold;
+      color: #c15d3c;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.9rem;
+    }
+    .letter-content {
+      margin-top: 8px;
+      color: #634b3e;
+      line-height: 1.8;
+      display: none;
+      font-size: 0.85rem;
+    }
+    .letter-content.open {
+      display: block;
+    }
+
+    /* ---- 虚拟礼物 ---- */
+    .gift-row {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin: 8px 0;
+      flex-wrap: wrap;
+    }
+    .gift-item {
+      background: white;
+      border-radius: 18px;
+      padding: 6px 8px;
+      font-size: 1.4rem;
+      cursor: pointer;
+      border: 2px solid #ffe3cf;
+      box-shadow: 0 5px 10px rgba(252, 150, 110, 0.13);
+      transition: 0.2s;
+      text-align: center;
+    }
+    .gift-item:active {
+      transform: scale(0.88);
+      background: #fff6ed;
+    }
+    .gift-label {
+      font-size: 0.55rem;
+      color: #b85d3a;
+      font-weight: bold;
+      display: block;
+    }
+
+    /* ---- 妈妈名言 ---- */
+    .quote-box {
+      background: #fffbf5;
+      border-radius: 22px;
+      padding: 12px 10px;
+      margin: 8px 0;
+      border: 2px dashed #fcd1b4;
+      text-align: center;
+      cursor: pointer;
+    }
+    .quote-text {
+      font-style: italic;
+      color: #6b4d3c;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .quote-speaker {
+      font-weight: bold;
+      color: #c56440;
+      margin-top: 4px;
+      font-size: 0.75rem;
+    }
+
+    /* ---- 倒茶 ---- */
+    .tea-section {
+      text-align: center;
+      margin: 8px 0;
+      cursor: pointer;
+      background: #fffaf3;
+      border-radius: 22px;
+      padding: 10px;
+      border: 2px solid #ffe3cf;
+    }
+    .tea-cup {
+      font-size: 38px;
+      display: inline-block;
+      transition: 0.3s;
+    }
+    .tea-cup.pour {
+      animation: pourTea 0.5s ease;
+    }
+    @keyframes pourTea {
+      0% { transform: rotate(0); }
+      50% { transform: rotate(-25deg); }
+      100% { transform: rotate(0); }
+    }
+    .tea-text {
+      font-size: 0.8rem;
+      color: #b45d3f;
+      margin-top: 3px;
+      font-weight: bold;
+    }
+
+    /* ---- 按钮 ---- */
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin: 14px 0 6px;
+    }
+    .btn-hug {
+      background: linear-gradient(180deg, #ffa78a 0%, #fd7862 100%);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 45px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: white;
+      box-shadow: 0 12px 20px rgba(255, 100, 70, 0.3);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      letter-spacing: 1px;
+    }
+    .paw-btn {
+      background: #fff3e8;
+      border-radius: 40px;
+      padding: 9px 16px;
+      font-size: 1.7rem;
+      cursor: pointer;
+      box-shadow: 0 8px 16px rgba(255, 150, 100, 0.22);
+      display: flex;
+      gap: 2px;
+    }
+
+    .counter {
+      text-align: center;
+      font-weight: bold;
+      color: #cf5e3a;
+      margin: 6px 0 4px;
+      font-size: 0.85rem;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: #cf8a70;
+      font-size: 0.8rem;
+      margin-top: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 背景星星 -->
+  <div class="bg-stars">
+    <span style="top:6%;left:8%;">✨</span>
+    <span style="top:15%;right:10%;">🌟</span>
+    <span style="top:55%;left:5%;">💫</span>
+    <span style="top:70%;right:6%;">⭐</span>
+    <span style="top:35%;left:4%;">🌸</span>
+    <span style="top:80%;right:12%;">🌷</span>
+  </div>
+
+  <div class="card">
+    <!-- 音乐按钮 -->
+    <div class="music-btn" id="musicBtn" title="🎸 真的爱你">🎸</div>
+
+    <!-- 标题 -->
+    <div class="header">
+      <h1 class="main-title">母亲节快乐</h1>
+      <div class="subtitle">💐 无法可修饰的一对手 · 真的爱你 💐</div>
+    </div>
+
+    <!-- 歌词滚动 -->
+    <div class="lyrics-box">
+      <div class="lyrics-text">
+        无法可修饰的一对手 · 带出温暖永远在背后 · 纵使啰嗦始终关注 · 不懂珍惜太内疚 · 沉醉于音阶她不赞赏 · 母亲的爱却永未退让 · 决心冲开心中挣扎 · 亲恩终可报答
+      </div>
+    </div>
+    <div class="lyrics-label">🎸 Beyond《真的爱你》</div>
+
+    <!-- 卡通角色 -->
+    <div class="carousel">
+      <div class="carousel-item" data-emoji="🧸"><span class="carousel-emoji">🧸</span><span class="carousel-label">小熊</span></div>
+      <div class="carousel-item" data-emoji="🐰"><span class="carousel-emoji">🐰</span><span class="carousel-label">兔兔</span></div>
+      <div class="carousel-item" data-emoji="🐣"><span class="carousel-emoji">🐣</span><span class="carousel-label">小鸡</span></div>
+      <div class="carousel-item" data-emoji="🐱"><span class="carousel-emoji">🐱</span><span class="carousel-label">猫咪</span></div>
+      <div class="carousel-item" data-emoji="🐶"><span class="carousel-emoji">🐶</span><span class="carousel-label">狗狗</span></div>
+      <div class="carousel-item" data-emoji="🦊"><span class="carousel-emoji">🦊</span><span class="carousel-label">狐狸</span></div>
+      <div class="carousel-item" data-emoji="🐼"><span class="carousel-emoji">🐼</span><span class="carousel-label">熊猫</span></div>
+    </div>
+
+    <!-- 温暖语句 -->
+    <div class="message-slider" id="messageSlider">
+      <div class="message-text" id="messageText">
+        🌷 亲爱的妈妈，<br>谢谢您做我的妈妈，<br>像春天的阳光一样温暖，<br>像夏夜的星星一样明亮。
+      </div>
+      <div class="message-author">—— 您的宝贝女儿</div>
+      <div class="swipe-hint">👆 点这里换一句暖心话</div>
+    </div>
+
+    <!-- 妈妈小档案 -->
+    <div class="mom-profile">
+      <div class="tag">🌸 温柔</div>
+      <div class="tag">☀️ 温暖</div>
+      <div class="tag">💪 坚强</div>
+      <div class="tag">🎨 可爱</div>
+      <div class="tag">🍰 厨神</div>
+      <div class="tag">🦸‍♀️ 超级英雄</div>
+      <div class="tag">🌟 最美</div>
+      <div class="tag">💖 无条件爱</div>
+    </div>
+
+    <!-- 爱心树 -->
+    <div class="love-tree" id="loveTree">
+      <div class="tree-emoji" id="treeEmoji">🌱</div>
+      <div class="tree-text">💝 点击浇灌爱心树</div>
+      <div class="tree-hearts" id="treeHearts"></div>
+    </div>
+
+    <!-- 和妈妈的回忆 -->
+    <div class="timeline">
+      <h4>📅 和妈妈的温暖回忆</h4>
+      <div class="timeline-item"><span class="timeline-icon">👶</span> 妈妈第一次抱我在怀里</div>
+      <div class="timeline-item"><span class="timeline-icon">📚</span> 妈妈教我读书写字</div>
+      <div class="timeline-item"><span class="timeline-icon">🍳</span> 妈妈做的每一顿早餐</div>
+      <div class="timeline-item"><span class="timeline-icon">🤒</span> 生病时妈妈整夜守护</div>
+      <div class="timeline-item"><span class="timeline-icon">🎓</span> 妈妈为我每一次成长骄傲</div>
+      <div class="timeline-item"><span class="timeline-icon">💕</span> 现在换我来爱妈妈</div>
+    </div>
+
+    <!-- 10件事 -->
+    <div class="ten-things">
+      <h4>💌 我想对妈妈说的10件事</h4>
+      <div class="thing-item"><span class="thing-num">1</span> 谢谢您每天早起为我做早餐 🍳</div>
+      <div class="thing-item"><span class="thing-num">2</span> 喜欢您摸我头发的温柔时刻 ✨</div>
+      <div class="thing-item"><span class="thing-num">3</span> 您做的菜是世界上最好吃的 🍲</div>
+      <div class="thing-item"><span class="thing-num">4</span> 每次生病您都整夜陪着 💊</div>
+      <div class="thing-item"><span class="thing-num">5</span> 您的笑容是我最大的动力 😊</div>
+      <div class="thing-item"><span class="thing-num">6</span> 谢谢您包容我的小脾气 🙏</div>
+      <div class="thing-item"><span class="thing-num">7</span> 您教会我做一个善良的人 🌷</div>
+      <div class="thing-item"><span class="thing-num">8</span> 想带您去全世界旅行 ✈️</div>
+      <div class="thing-item"><span class="thing-num">9</span> 希望您永远健康美丽 💕</div>
+      <div class="thing-item"><span class="thing-num">10</span> 妈妈，我永远永远爱您 ❤️</div>
+    </div>
+
+    <!-- 妈妈名言 -->
+    <div class="quote-box" id="quoteBox">
+      <div class="quote-text" id="quoteText">"早点睡，别熬夜，身体最重要。"</div>
+      <div class="quote-speaker">—— 妈妈的金句</div>
+      <div style="font-size:0.6rem;color:#dba88e;margin-top:2px;">👆 点击换一句</div>
+    </div>
+
+    <!-- 虚拟礼物 -->
+    <div style="text-align:center;font-size:0.8rem;color:#c5613d;font-weight:bold;margin-top:6px;">🎁 点礼物送给妈妈</div>
+    <div class="gift-row">
+      <div class="gift-item" data-emoji="💐"><span>💐</span><span class="gift-label">鲜花</span></div>
+      <div class="gift-item" data-emoji="🍰"><span>🍰</span><span class="gift-label">蛋糕</span></div>
+      <div class="gift-item" data-emoji="🎀"><span>🎀</span><span class="gift-label">蝴蝶结</span></div>
+      <div class="gift-item" data-emoji="💍"><span>💍</span><span class="gift-label">戒指</span></div>
+      <div class="gift-item" data-emoji="🏆"><span>🏆</span><span class="gift-label">奖杯</span></div>
+      <div class="gift-item" data-emoji="🎸"><span>🎸</span><span class="gift-label">吉他</span></div>
+    </div>
+
+    <!-- 倒茶 -->
+    <div class="tea-section" id="teaSection">
+      <div class="tea-cup" id="teaCup">🍵</div>
+      <div class="tea-text">点这里 · 给妈妈倒杯茶</div>
+    </div>
+
+    <!-- 给妈妈的信 -->
+    <div class="letter-box" id="letterBox">
+      <div class="letter-title">💌 点这里 · 给妈妈的一封信</div>
+      <div class="letter-content" id="letterContent">
+        <p>亲爱的妈妈：</p>
+        <p>今天是最特别的母亲节。Beyond唱道："无法可修饰的一对手，带出温暖永远在背后"——那就是您的手。</p>
+        <p>谢谢您陪我长大，教我勇敢和善良。您是我见过最坚强又最温柔的人。每次看到您笑，我就觉得整个世界都亮了。</p>
+        <p>希望您永远健康、快乐，做世界上最幸福的妈妈。我会一直一直爱您，像小熊抱住蜂蜜罐那样不放开 🧸🍯</p>
+        <p>真的爱您。</p>
+        <p style="text-align:right;margin-top:8px;">爱您的女儿 敬上</p>
+      </div>
+    </div>
+
+    <!-- 互动按钮 -->
+    <div class="actions">
+      <button class="btn-hug" id="hugBtn">🤗 抱抱妈妈</button>
+      <div class="paw-btn" id="pawBtn">🐾🐾🐾</div>
+    </div>
+
+    <div class="counter">
+      已送给妈妈 <span id="loveCount">0</span> 个小爱心 ❤️
+    </div>
+
+    <div class="footer-note">
+      🌸 无法可修饰的一对手 · 真的爱你 🌸
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ========== 音乐系统 - 《真的爱你》旋律 ==========
+      let audioCtx = null;
+      let isPlaying = false;
+      const musicBtn = document.getElementById('musicBtn');
+
+      function initAudio() {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+      }
+
+      // 《真的爱你》经典旋律（简化版）
+      function playReallyLoveYou() {
+        if (!audioCtx) return;
+        // 真的爱你 主旋律音符 (C大调简化)
+        const melody = [
+          // 无法可修饰的一对手
+          523, 587, 659, 523, 587, 659, 698, 659, 587, 523,
+          // 带出温暖永远在背后
+          440, 523, 587, 523, 440, 392, 440, 523,
+          // 纵使啰嗦始终关注
+          523, 587, 659, 523, 587, 659, 698, 784, 698, 659,
+          // 不懂珍惜太内疚
+          587, 523, 440, 523, 587, 523, 440, 392,
+          // 沉醉于音阶她不赞赏
+          523, 587, 659, 698, 784, 880, 784, 698, 659,
+          // 母亲的爱却永未退让
+          587, 659, 698, 659, 587, 523, 440, 523,
+          // 决心冲开心中挣扎
+          523, 587, 659, 698, 784, 698, 659, 587,
+          // 亲恩终可报答
+          523, 440, 392, 440, 523, 440, 392, 349
+        ];
+
+        const durations = [
+          0.4, 0.4, 0.4, 0.3, 0.3, 0.4, 0.5, 0.3, 0.3, 0.5,
+          0.4, 0.4, 0.4, 0.3, 0.3, 0.4, 0.4, 0.6,
+          0.4, 0.4, 0.4, 0.3, 0.3, 0.4, 0.3, 0.3, 0.3, 0.4,
+          0.4, 0.4, 0.3, 0.3, 0.4, 0.4, 0.3, 0.5,
+          0.4, 0.4, 0.4, 0.3, 0.3, 0.3, 0.3, 0.3, 0.4,
+          0.4, 0.4, 0.4, 0.3, 0.3, 0.4, 0.3, 0.5,
+          0.4, 0.4, 0.4, 0.3, 0.3, 0.4, 0.3, 0.4,
+          0.4, 0.4, 0.3, 0.3, 0.4, 0.4, 0.4, 0.7
+        ];
+
+        const now = audioCtx.currentTime;
+        let timeOffset = 0;
+
+        melody.forEach((freq, i) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.value = freq;
+          const startTime = now + timeOffset;
+          const duration = durations[i] || 0.4;
+          gain.gain.setValueAtTime(0.25, startTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration - 0.05);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(startTime);
+          osc.stop(startTime + duration);
+          timeOffset += duration;
+        });
+      }
+
+      let musicInterval = null;
+      musicBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        initAudio();
+        if (!isPlaying) {
+          playReallyLoveYou();
+          musicInterval = setInterval(playReallyLoveYou, 16000);
+          musicBtn.classList.add('playing');
+          musicBtn.textContent = '🎶';
+          isPlaying = true;
+        } else {
+          clearInterval(musicInterval);
+          musicBtn.classList.remove('playing');
+          musicBtn.textContent = '🎸';
+          isPlaying = false;
+        }
+      });
+
+      // ========== 温暖语句库 ==========
+      const messages = [
+        "🌷 亲爱的妈妈，<br>谢谢您做我的妈妈，<br>像春天的阳光一样温暖，<br>像夏夜的星星一样明亮。",
+        "🧸 妈妈，您是我的小熊软糖，<br>甜甜的、软软的，<br>抱着就不想放开。<br>祝您母亲节快乐！",
+        "🐰 亲爱的妈妈，<br>您像小兔子一样温柔，<br>给我最柔软的拥抱。<br>我永远爱您！",
+        "🐣 妈妈妈妈！<br>您是我破壳而出时<br>见到的第一道光。<br>谢谢您一直照亮我。",
+        "🌸 世界上最好的妈妈：<br>谢谢您把最好的都给我，<br>以后换我来宠您、爱您、<br>陪您看遍所有风景。",
+        "🍯 妈妈的爱像蜂蜜，<br>甜甜的、黏黏的，<br>一辈子都离不开。<br>母亲节快乐！",
+        "💕 您教我说话、走路、<br>教我做一个善良的人。<br>今天我要大声说：<br>妈妈我爱您！",
+        "🎀 妈妈是世界上最美的女孩，<br>从前是，现在是，<br>永远是。",
+        "🎸 无法可修饰的一对手，<br>带出温暖永远在背后。<br>妈妈，真的爱您。",
+        "🍰 妈妈，您的爱<br>比蛋糕还甜，<br>比阳光还暖。<br>谢谢您做我的妈妈。"
+      ];
+
+      let currentMessage = 0;
+      const messageText = document.getElementById('messageText');
+      const messageSlider = document.getElementById('messageSlider');
+
+      messageSlider.addEventListener('click', () => {
+        currentMessage = (currentMessage + 1) % messages.length;
+        messageText.innerHTML = messages[currentMessage];
+        messageSlider.style.transform = 'scale(0.97)';
+        setTimeout(() => { messageSlider.style.transform = ''; }, 150);
+      });
+
+      // ========== 妈妈名言库 ==========
+      const quotes = [
+        { text: '"早点睡，别熬夜，身体最重要。"', speaker: "—— 妈妈的叮嘱" },
+        { text: '"多穿点衣服，外面冷。"', speaker: "—— 妈妈的关心" },
+        { text: '"想吃什么？妈妈给你做。"', speaker: "—— 妈妈的魔法" },
+        { text: '"没关系，慢慢来，妈妈在。"', speaker: "—— 妈妈的温柔" },
+        { text: '"你是最棒的，妈妈相信你。"', speaker: "—— 妈妈的信任" },
+        { text: '"累了就回家，妈妈等你。"', speaker: "—— 妈妈的港湾" },
+        { text: '"看到你笑，妈妈就开心。"', speaker: "—— 妈妈的幸福" },
+        { text: '"宝，记得好好吃饭。"', speaker: "—— 妈妈的爱" },
+        { text: '"无论多大，你都是妈妈的宝贝。"', speaker: "—— 妈妈的永远" }
+      ];
+      let currentQuote = 0;
+      const quoteText = document.getElementById('quoteText');
+      const quoteSpeaker = document.querySelector('.quote-speaker');
+      const quoteBox = document.getElementById('quoteBox');
+
+      quoteBox.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentQuote = (currentQuote + 1) % quotes.length;
+        quoteText.textContent = quotes[currentQuote].text;
+        quoteSpeaker.textContent = quotes[currentQuote].speaker;
+      });
+
+      // ========== 信件折叠 ==========
+      const letterBox = document.getElementById('letterBox');
+      const letterContent = document.getElementById('letterContent');
+      letterBox.addEventListener('click', (e) => {
+        e.stopPropagation();
+        letterContent.classList.toggle('open');
+      });
+
+      // ========== 爱心树浇灌 ==========
+      let treeStage = 0;
+      const treeStages = ['🌱', '🌿', '🪴', '🌳', '💐🌳', '🌸🌳🌸', '💖🌳💖'];
+      const treeHeartsStages = ['', '💕', '💕💕', '💕💕💕', '💕💕💕💕', '💕💕💕💕💕', '💖💖💖💖💖💖'];
+      const treeEmoji = document.getElementById('treeEmoji');
+      const treeHearts = document.getElementById('treeHearts');
+      const loveTree = document.getElementById('loveTree');
+
+      loveTree.addEventListener('click', (e) => {
+        e.stopPropagation();
+        treeStage = (treeStage + 1) % treeStages.length;
+        treeEmoji.textContent = treeStages[treeStage];
+        treeHearts.textContent = treeHeartsStages[treeStage];
+        treeEmoji.classList.add('grow');
+        setTimeout(() => treeEmoji.classList.remove('grow'), 600);
+        addLove('💧', e);
+        if (treeStage === treeStages.length - 1) {
+          setTimeout(() => alert('🌳 爱心树开花啦！妈妈的爱让一切生长～'), 300);
+        }
+      });
+
+      // ========== 倒茶 ==========
+      const teaSection = document.getElementById('teaSection');
+      const teaCup = document.getElementById('teaCup');
+      teaSection.addEventListener('click', (e) => {
+        e.stopPropagation();
+        teaCup.classList.add('pour');
+        setTimeout(() => teaCup.classList.remove('pour'), 500);
+        love++;
+        updateLove();
+        spawnEmoji('🍵', e.clientX || window.innerWidth/2, e.clientY || window.innerHeight/2);
+        alert('🍵 妈妈请喝茶～您辛苦了！');
+      });
+
+      // ========== 爱心计数 ==========
+      let love = 0;
+      const loveSpan = document.getElementById('loveCount');
+      function updateLove() {
+        loveSpan.textContent = love;
+      }
+
+      function spawnEmoji(emoji, x, y) {
+        const el = document.createElement('div');
+        el.textContent = emoji;
+        el.style.position = 'fixed';
+        el.style.left = (x || window.innerWidth/2) + 'px';
+        el.style.top = (y || window.innerHeight/2) + 'px';
+        el.style.fontSize = '34px';
+        el.style.pointerEvents = 'none';
+        el.style.zIndex = '9999';
+        el.style.transition = 'all 1.3s ease-out';
+        el.style.opacity = '1';
+        document.body.appendChild(el);
+
+        requestAnimationFrame(() => {
+          el.style.transform = `translate(${(Math.random()-0.5)*120}px, -85px)`;
+          el.style.opacity = '0';
+        });
+        setTimeout(() => { if (el.parentNode) el.remove(); }, 1400);
+      }
+
+      function addLove(emoji, e) {
+        love++;
+        updateLove();
+        const cx = e.clientX || (e.touches && e.touches[0].clientX) || window.innerWidth/2;
+        const cy = e.clientY || (e.touches && e.touches[0].clientY) || window.innerHeight/2;
+        spawnEmoji(emoji || '❤️', cx, cy);
+
+        if (love === 10) {
+          setTimeout(() => alert('🌸 10个小心心！妈妈收到了～'), 80);
+        } else if (love === 20) {
+          setTimeout(() => alert('💕 20个啦！妈妈好幸福！'), 80);
+        } else if (love === 35) {
+          setTimeout(() => alert('🎸 35个！真的爱你，妈妈！'), 80);
+        } else if (love === 50) {
+          setTimeout(() => alert('👑 50个爱心！妈妈是女王！'), 80);
+        }
+      }
+
+      // 抱抱按钮
+      document.getElementById('hugBtn').addEventListener('click', (e) => {
+        addLove('🤗', e);
+      });
+
+      // 肉垫按钮
+      document.getElementById('pawBtn').addEventListener('click', (e) => {
+        addLove('🐾', e);
+      });
+
+      // 卡通角色点击
+      document.querySelectorAll('.carousel-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          const emoji = item.getAttribute('data-emoji') || '💖';
+          addLove(emoji, e);
+        });
+      });
+
+      // 虚拟礼物点击
+      document.querySelectorAll('.gift-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          const emoji = item.getAttribute('data-emoji') || '🎁';
+          addLove(emoji, e);
+        });
+      });
+
+      updateLove();
+    })();
+  </script>
+</body>
+</html>
